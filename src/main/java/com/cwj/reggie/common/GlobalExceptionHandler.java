@@ -30,4 +30,14 @@ public class GlobalExceptionHandler {
         }
         return R.error("网络繁忙，请稍后访问...");
     }
+
+    /**
+     * 异常处理方法
+     * @param ex
+     * @return
+     */
+    @ExceptionHandler(CustomException.class)
+    public R<String> exceptionHandler(CustomException ex){
+        return R.error(ex.getMessage());
+    }
 }

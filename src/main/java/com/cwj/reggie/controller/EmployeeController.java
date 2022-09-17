@@ -27,6 +27,12 @@ public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
 
+    /**
+     * 登录验证
+     * @param employee
+     * @param session
+     * @return
+     */
     @PostMapping("/login")
     public R<Employee> login(@RequestBody Employee employee, HttpSession session){
         //1.将密码进行MD5加密
@@ -59,12 +65,23 @@ public class EmployeeController {
         return R.success(emp);
     }
 
+    /**
+     * 退出操作
+     * @param session
+     * @return
+     */
     @PostMapping("/logout")
     public R<String> logout(HttpSession session){
         session.removeAttribute(Constants.EMPLOYEE_SESSION);
         return R.success("退出成功");
     }
 
+    /**
+     * 添加用户
+     * @param employee
+     * @param session
+     * @return
+     */
     @PostMapping
     public R<String> save(@RequestBody Employee employee,HttpSession session){
        // Employee(id=null, name=张三, username=zhangsan, password=null, phone=18312312312, sex=1, idNumber=123123123123123, status=null, createTime=null, updateTime=null, createUser=null, updateUser=null)
@@ -82,6 +99,13 @@ public class EmployeeController {
     return R.success("添加成功");
     }
 
+    /**
+     * 分页操作
+     * @param page
+     * @param pageSize
+     * @param name 模糊查询
+     * @return
+     */
     @GetMapping("/page")
     public R<Page> page(int page,int pageSize,String name){
         log.info("page = {},pageSize = {},name = {}",page,pageSize,name);
@@ -99,6 +123,12 @@ public class EmployeeController {
         return R.success(pageInfo);
     }
 
+    /**
+     * 修改用户信息
+     * @param employee
+     * @param session
+     * @return
+     */
     @PutMapping
     public R<String> update(@RequestBody Employee employee,HttpSession session){
         long id = Thread.currentThread().getId();
@@ -111,6 +141,11 @@ public class EmployeeController {
         return R.success("修改成功");
     }
 
+    /**
+     *回显用户信息
+     * @param id
+     * @return
+     */
     @GetMapping("/{id}")
     public R<Employee> getEmployeeById(@PathVariable Long id){
         log.info("id === > {}",id);
