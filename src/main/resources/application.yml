@@ -21,3 +21,6 @@ mybatis-plus:
   # classpath* 代表扫描全局,也就是所有的子模块,
   # ** 代表中间不管有多少级目录,最终找到mapper,找到任意名称的xml文件
   mapper-locations: classpath*:com/xxx/**/mapper/*.xml
+
+reggie:
+  path: E:/img/
